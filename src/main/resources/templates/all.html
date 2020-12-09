@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <r th:if="${characters.empty}">
+        <td colspan="2"> No characters Available </td>
+    </r>
+    <r th:each="character : ${characters}">
+        <table>
+            <tbody>
+            <tr>
+                <td><span th:text="${character.id}"> id </span></td>
+                <td><a th:href = "@{'/characterInfo?id='+ ${character.id}}" th:text="${character.name}"></a></td>
+            </tr>
+            </TBODY>
+        </table>
+    </r>
+</html>

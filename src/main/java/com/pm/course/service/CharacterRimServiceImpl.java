@@ -27,7 +27,7 @@ public class CharacterRimServiceImpl implements CharacterRimService{
         String url = "https://rickandmortyapi.com/api/character/" + String.valueOf(id);
         JSONObject json = apiRetriever.readJsonFromUrl(url);
 
-        CharacterRim toReturn = new CharacterRim(
+        return new CharacterRim(
                 json.get("name").toString(),
                 json.get("image").toString(),
                 json.get("species").toString(),
@@ -36,15 +36,23 @@ public class CharacterRimServiceImpl implements CharacterRimService{
                 json.getJSONObject("location").get("name").toString(),
                 Long.valueOf(json.get("id").toString())
         );
-        return toReturn;
 
     }
 
     @Override
     public List<CharacterRim> characters(String name) throws IOException {
         String url = "https://rickandmortyapi.com/api/character/?name=" + name;
-        JSONObject json = apiRetriever.readJsonFromUrl(url);
+        return getCharacterRims(url);
+    }
 
+    @Override
+    public List<CharacterRim> characters(int page) throws IOException {
+        String url = ("https://rickandmortyapi.com/api/character/?page=" + page);
+        return getCharacterRims(url);
+    }
+
+    private List<CharacterRim> getCharacterRims(String url) throws IOException {
+        JSONObject json = apiRetriever.readJsonFromUrl(url);
         JSONArray data = json.getJSONArray("results");
         List<CharacterRim> list = new ArrayList<>();
         System.out.println(data.length());

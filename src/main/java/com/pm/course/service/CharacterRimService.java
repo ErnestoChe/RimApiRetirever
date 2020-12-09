@@ -11,4 +11,7 @@ public interface CharacterRimService {
     CharacterRim character(int id) throws IOException;
 
     List<CharacterRim> characters(String name) throws IOException;
+
+    List<CharacterRim> characters(int page) throws IOException;
+
 }
